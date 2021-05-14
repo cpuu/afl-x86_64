@@ -8,7 +8,7 @@ RUN apt-get update && \
     qemu-user qemu-user-static build-essential  \
     libtool-bin python automake bison vim
 
-RUN useradd -u 1000 -m -d /home/afl afl
+RUN useradd -u 1001 -m -d /home/afl afl
 WORKDIR /home/afl
 RUN git clone https://github.com/google/AFL.git
 ADD afltimeout.sh /home/afl/AFL
@@ -24,7 +24,7 @@ RUN make install
 #WORKDIR /home/afl/pwndbg
 #RUN ./setup.sh
 
-
+USER afl
 WORKDIR /home/afl/
 
 ENTRYPOINT ["./AFL/afltimeout.sh"]
